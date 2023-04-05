@@ -6,30 +6,39 @@ using namespace std;
 // } Driver Code Ends
 //User function Template for C++
 
-class Solution{
+class Solution {
     public:
-    vector<long long int> twoOddNum(long long int Arr[], long long int N)  
-    {
-        // code here
-        vector< long long int> v;
-long long int res=0,x=0,count=0,b=0;
-for(long long int i=0;i<N;i++)
-{
-  res=res^Arr[i];
-}
-while(!(res&(1<<count))){
- ++count;
-}
-b=b|(1<<count);
-for(long long int i=0;i<N;i++)
-{  
- if(Arr[i]&b)
-    x=x^res^Arr[i];
-}
-v.push_back(max(x,res^x));
-v.push_back(min(x,res^x));
-return v;
-    }
+        vector<long long int> twoOddNum(long long int arr[], long long int N) {
+            int xorVal = 0;
+            for(int i=0;i<N;i++){
+                xorVal ^= arr[i];
+            }
+            int setBit = 0;
+            for(int i=0;i<32;i++){
+                int curr = 1<<i;
+                if((xorVal&curr)!=0){
+                    setBit = curr;
+                    break;
+                }
+            }
+            int first=0,second=0;
+            for(int i=0;i<N;i++){
+                if((arr[i]&setBit)!=0){
+                    first ^= arr[i];
+                }else{
+                    second ^= arr[i];
+                }
+            }
+            vector< long long int> ans;
+            if(first<second){
+                ans.push_back(second);
+                ans.push_back(first);
+            }else{
+                ans.push_back(first);
+                ans.push_back(second);
+            }
+            return ans;
+        }
 };
 
 //{ Driver Code Starts.
