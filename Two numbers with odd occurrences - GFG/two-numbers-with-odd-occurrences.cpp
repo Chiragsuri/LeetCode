@@ -9,21 +9,13 @@ using namespace std;
 class Solution {
     public:
         vector<long long int> twoOddNum(long long int arr[], long long int N) {
-            int xorVal = 0;
+            int xorVal = 0, setBit = 0, first = 0, second = 0;
             for(int i=0;i<N;i++){
                 xorVal ^= arr[i];
             }
-            int setBit = 0;
-            for(int i=0;i<32;i++){
-                int curr = 1<<i;
-                if((xorVal&curr)!=0){
-                    setBit = curr;
-                    break;
-                }
-            }
-            int first=0,second=0;
+            setBit = xorVal & ~(xorVal-1); // to find the rightmost set bit
             for(int i=0;i<N;i++){
-                if((arr[i]&setBit)!=0){
+                if(arr[i] & setBit){
                     first ^= arr[i];
                 }else{
                     second ^= arr[i];
