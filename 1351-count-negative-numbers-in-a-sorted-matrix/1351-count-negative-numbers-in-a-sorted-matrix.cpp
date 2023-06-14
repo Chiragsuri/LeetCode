@@ -2,32 +2,24 @@ class Solution {
 public:
     int countNegatives(vector<vector<int>>& grid) {
         int count = 0;
-        for (const auto& row : grid) {
-            count += binarySearchCount(row);
-        }
-        return count;
-    }
+        int rows = grid.size();
+        int cols = grid[0].size();
+        int row = 0;
+        int col = cols - 1;
 
-private:
-    int binarySearchCount(const vector<int>& row) {
-        int left = 0;
-        int right = row.size() - 1;
-        int count = 0;
-
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-
-            if (row[mid] < 0) {
-                count += right - mid + 1;
-                right = mid - 1;
+        while (row < rows && col >= 0) {
+            if (grid[row][col] < 0) {
+                count += rows - row;
+                col--;
             } else {
-                left = mid + 1;
+                row++;
             }
         }
 
         return count;
     }
 };
+
 
 
 
