@@ -9,9 +9,21 @@ public:
 
     for (int aliceCandy : aliceSizes) {
         int targetBobCandy = aliceCandy + targetDiff;
-        auto it = lower_bound(bobSizes.begin(), bobSizes.end(), targetBobCandy);
-        if (it != bobSizes.end() && *it == targetBobCandy) {
-            return { aliceCandy, targetBobCandy };
+        int left = 0;
+        int right = bobSizes.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (bobSizes[mid] == targetBobCandy) {
+                return { aliceCandy, targetBobCandy };
+            }
+            else if (bobSizes[mid] < targetBobCandy) {
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            }
         }
     }
 
