@@ -1,19 +1,21 @@
 class Solution {
 public:
     vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes) {
-        vector<int>ans;
-        int s1=0,s2=0;
-        for(auto i:aliceSizes) s1+=i;
-        for(auto i:bobSizes) s2+=i;
-        for(auto i:aliceSizes){
-            for(auto j:bobSizes){
-                if((s1-i+j)==s2-j+i){
-                    ans.push_back(i);
-                    ans.push_back(j);
-               return ans;    
-                }
-            }
+    int aliceTotal = accumulate(aliceSizes.begin(), aliceSizes.end(), 0);
+    int bobTotal = accumulate(bobSizes.begin(), bobSizes.end(), 0);
+    int targetDiff = (bobTotal - aliceTotal) / 2;
+
+    sort(bobSizes.begin(), bobSizes.end());
+
+    for (int aliceCandy : aliceSizes) {
+        int targetBobCandy = aliceCandy + targetDiff;
+        auto it = lower_bound(bobSizes.begin(), bobSizes.end(), targetBobCandy);
+        if (it != bobSizes.end() && *it == targetBobCandy) {
+            return { aliceCandy, targetBobCandy };
         }
-    return ans;
+    }
+
+    // If no valid pair is found, return an empty vector or handle the error accordingly.
+    return {};
     }
 };
