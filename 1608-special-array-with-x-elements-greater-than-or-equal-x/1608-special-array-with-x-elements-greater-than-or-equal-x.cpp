@@ -3,20 +3,23 @@ public:
     int specialArray(vector<int>& nums) {
     int maxNum = *max_element(nums.begin(), nums.end());
 
-    for (int x = 0; x <= maxNum; x++) {
-        int count = 0;
+    sort(nums.begin(),nums.end());
+        for(int i=0;i<=maxNum;i++){
+            int left=0;
+            int right=nums.size()-1;
+            while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int count = nums.size() - mid;
 
-        for (int num : nums) {
-            if (num >= x) {
-                count++;
+            if (nums[mid] >= count && (mid == 0 || nums[mid - 1] < count)) {
+                return count;
+            } else if (nums[mid] < count) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
-
-        if (count == x) {
-            return x;
         }
+        return -1;
     }
-
-    return -1;
-}
 };
