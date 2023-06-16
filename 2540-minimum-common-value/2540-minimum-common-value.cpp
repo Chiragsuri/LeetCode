@@ -4,11 +4,6 @@ public:
         int n1 = nums1.size();
         int n2 = nums2.size();
 
-        if (n1 > n2) {
-            swap(nums1, nums2);
-            swap(n1, n2);
-        }
-
         for (int num : nums1) {
             int left = 0;
             int right = n2 - 1;
