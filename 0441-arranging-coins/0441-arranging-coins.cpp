@@ -1,12 +1,19 @@
 class Solution {
-public:
-    int arrangeCoins(int n) {
-        for(long long int i=1;i<=n;i++){
-            if((i*(i+1))/2 > n)
-                return i-1;
-            else if((i*(i+1))/2 == n)
-                return i;
-        }
-        return 0;
+  public: int arrangeCoins(int n) {
+    long left = 0, right = n;
+    long mid, curr;
+    while (left <= right) {
+      mid = left + (right - left) / 2;
+      curr = mid * (mid + 1) / 2;
+
+      if (curr == n) return (int)mid;
+
+      if (n < curr) {
+        right = mid - 1;
+      } else {
+        left = mid + 1;
+      }
     }
+    return (int)right;
+  }
 };
