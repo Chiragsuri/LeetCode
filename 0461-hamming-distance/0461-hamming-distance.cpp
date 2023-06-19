@@ -3,12 +3,11 @@ public:
     int hammingDistance(int x, int y) {
         int a = x^y;
         // cout<<a<<endl;
-        int sum=0;
-        while(a!=0){
-            sum+=a%2;
-            a=a/2;
-           cout<<sum<<endl; 
+       int cnt=0;
+        while(a){
+            a=a&(a-1);
+            cnt++;
         }
-        return sum;
+        return cnt;
     }
 };
