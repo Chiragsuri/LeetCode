@@ -8,32 +8,38 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
 class Solution {
 public:
-    ListNode* mergeNodes(ListNode* head) {
-        ListNode* temp = head->next;
-        int sum = 0;
-        ListNode* newHead = new ListNode(0);
-        ListNode* dummy = newHead;
-        
-        while (temp != NULL) {
-            if (temp->val == 0) {
-                dummy->next = new ListNode(sum); 
-                dummy = dummy->next; 
+        ListNode* mergeNodes(ListNode* head) {
+        if(head->val==0){
+            head=head->next;
+        }
+        ListNode* res=head;
+        ListNode* temp=head;
+        int sum=0;
+
+        while(temp){
+            if(temp->val!=0){
+                sum+=temp->val;
+                temp=temp->next;
+            } 
+            else{
+                res->val=sum;
+                res->next = temp->next;
+                temp = temp->next;
+                res = temp;
                 sum = 0;
-            } else {
-                sum += temp->val;
             }
-            
-            temp = temp->next;
+
         }
-        
-        if (sum > 0) {
-            dummy->next = new ListNode(sum); 
-        }
-        
-        ListNode* result = newHead->next;
-        delete newHead; 
-        return result;
+        return head;
     }
 };
+
+
+
+
+
+
+
