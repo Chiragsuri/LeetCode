@@ -11,30 +11,33 @@
 class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k) {
-        int len =1;
-        ListNode* temp=head;
-        while(temp->next){
-            temp=temp->next;
-            len++;
-        }
-        ListNode* temp1=head;
-        int a=1;
-        while(a!=k){
-            temp1=temp1->next;
-            a++;
-        }
-        int b=1;
-        ListNode* temp2 = head;
-        while(b!=len-k+1){
-            temp2=temp2->next;
-            b++;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* node1 = nullptr;
+        ListNode* node2 = nullptr;
+        
+        // Move the fast pointer to the kth node from the beginning
+        for (int i = 1; i < k; i++) {
+            fast = fast->next;
         }
         
-        int dummyvalue = temp1->val;
-        //swapping
-        temp1->val=temp2->val;
-        temp2->val=dummyvalue;
-        // cout<<temp2->val;
+        // Save the kth node as node1
+        node1 = fast;
+        
+        // Move both slow and fast pointers simultaneously until fast reaches the end
+        while (fast->next) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        
+        // Save the node at (length - k + 1) as node2
+        node2 = slow;
+        
+        // Swap the values of node1 and node2
+        int tempValue = node1->val;
+        node1->val = node2->val;
+        node2->val = tempValue;
+        
         return head;
     }
 };
