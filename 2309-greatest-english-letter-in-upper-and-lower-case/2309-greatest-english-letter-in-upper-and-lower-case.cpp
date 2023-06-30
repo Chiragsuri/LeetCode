@@ -3,10 +3,10 @@ public:
     
     string greatestLetter(string s) 
     {
-        vector<int> low(26), upp(26); //storing occurences of lower and upper case letters
+        vector<int> low(26), upp(26); 
         string res = "";
     
-        for(auto it : s) //iterate over each char and mark it in respective vector
+        for(auto it : s) 
         {
             if(it-'A'>=0 && it-'A'<26)
                 upp[it-'A']++;
@@ -14,12 +14,11 @@ public:
                 low[it-'a']++;
         }
         
-        for(int i=25; i>=0; i--) //start from greater char 
+        for(int i=25; i>=0; i--)
         {
-            if(low[i] && upp[i]) //if char found in upp and low that will be the result
+            if(low[i] && upp[i]) 
             {
-                res += 'A'+i; 
-                break;
+                return res = 'A'+i; 
             }
                 
         }
