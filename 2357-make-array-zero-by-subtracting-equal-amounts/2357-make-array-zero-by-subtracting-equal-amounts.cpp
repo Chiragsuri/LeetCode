@@ -1,16 +1,19 @@
 class Solution {
 public:
     int minimumOperations(vector<int>& nums) {
-        unordered_map<int,int>mp;
-        int count=0;
-        for(auto it:nums){
-            if(it>0)
-                mp[it]++;
+        priority_queue<int, vector<int>, greater<int>> pq;
+        for(int i = 0; i < nums.size(); ++i){
+            if(nums[i] != 0)
+                pq.push(nums[i]);
         }
-        for(auto it: mp){
-            if(it.second>0)
-                count++;
+        int move = 0, curr = -1;
+        while(!pq.empty()){
+            if(pq.top() != curr){
+                move++;
+                curr = pq.top();
+            }
+            pq.pop();
         }
-        return count;
+        return move;
     }
 };
