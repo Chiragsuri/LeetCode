@@ -1,30 +1,45 @@
-typedef pair<int,int> pa;
+typedef pair<int, int> pa;
+
 class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
-        priority_queue<pa>pq;
+        priority_queue<pa> pq;
         
         int rowSize = mat.size();
         int colSize = mat[0].size();
-        int count = 0;
+        
+        
         for (int i = 0; i < rowSize; i++) {
-            for (int j = 0; j < colSize; j++) {
-                if (mat[i][j] == 1) {
-                    count++;
+            int left = 0;
+            int right = colSize - 1;
+            
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                
+                if (mat[i][mid] == 1) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
                 }
             }
-            pq.push(make_pair(count,i));
-            if(pq.size()>k)
+            
+            pq.push(make_pair(left, i));
+            
+            if (pq.size() > k) {
+                pq.pop();
+            }
+            
+        }
+        
+        vector<int> result;
+        
+        while (!pq.empty()) {
+            pair<int, int> temp = pq.top();
             pq.pop();
-            count = 0; 
+            result.push_back(temp.second);
         }
-        vector<int>result;
-        while(!pq.empty()){
-        pair<int,int> temp = pq.top();
-        pq.pop();
-        result.push_back(temp.second);
-        }
-        reverse(result.begin(),result.end());
+        
+        reverse(result.begin(), result.end());
         return result;
     }
 };
