@@ -5,9 +5,10 @@ public:
         st.push("main");
         int size=0;
         for(auto it: logs){
-            if(it == "./" || it == "../" and st.top()=="main")
+            if(it == "./")
                 continue;
-            else if(it == "../" and st.top()!="main"){
+            else if(it == "../"){
+                if(st.top()!="main")
                 st.pop();
             }
             else{
@@ -16,6 +17,6 @@ public:
             }
             size=st.size();
         }
-        return st.size()==1 ? 0 : size-1;
+        return size-1;
     }
 };
