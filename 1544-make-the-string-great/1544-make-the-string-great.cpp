@@ -3,7 +3,7 @@ public:
     string makeGood(string s) {
         stack<char> st;
         for (int i = s.length() - 1; i >= 0; i--) {
-             if (!st.empty() && (st.top() != s[i] && tolower(st.top()) == tolower(s[i]))) {
+             if (!st.empty() && (abs(s[i]-st.top())==32)) {
                 st.pop();
             }
             else {
