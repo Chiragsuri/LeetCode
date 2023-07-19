@@ -16,30 +16,25 @@ public:
             return 0;
 
         int depth = 0;
-        vector<pair<int,int>>v;
         queue<TreeNode*> q;
+        int sum=0;
         q.push(root);
 
         while (!q.empty()) {
             depth++;
+            sum=0;
             int levelSize = q.size();
             for (int i = 0; i < levelSize; i++) {
                 TreeNode* curr = q.front();
                 q.pop();
-                if (!curr->left && !curr->right){
-                    v.push_back({curr->val,depth});
-                }
+                if (!curr->left && !curr->right)
+                    sum+=curr->val;
                 if (curr->left)
                     q.push(curr->left);
                 if (curr->right)
                     q.push(curr->right);
             }
         }
-        int ans=0;
-        for(auto it:v){
-            if(it.second==depth)
-                ans+=it.first;
-        }
-        return ans;
+        return sum;
     }
 };
