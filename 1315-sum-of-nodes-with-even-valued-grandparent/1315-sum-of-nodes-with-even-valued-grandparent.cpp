@@ -14,32 +14,36 @@ public:
     int sumEvenGrandparent(TreeNode* root) {
         if (!root)
             return 0;
-        
-        queue<pair<TreeNode*, TreeNode*>> q; 
-        q.push({root, nullptr});
-        int sum = 0;
-
+        queue<TreeNode*> q;
+        q.push(root);
+        int sum=0;
         while (!q.empty()) {
             int levelSize = q.size();
             for (int i = 0; i < levelSize; i++) {
-                auto [curr, parent] = q.front(); 
+                TreeNode* curr = q.front();
                 q.pop();
 
                 if (!curr->left && !curr->right)
                     continue;
 
-                if (parent && parent->val % 2 == 0) { // Check if the parent node has an even value
-                    if (curr->left)
-                        sum += curr->left->val;
-                    if (curr->right)
-                        sum += curr->right->val;
+                if(curr->val%2==0){
+                    if(curr->left and curr->left->left!=NULL)
+                        sum+=curr->left->left->val;
+                        // cout<<curr->left->left->val;
+                    if(curr->left and curr->left->right!=NULL)
+                        sum+=curr->left->right->val;
+                        // cout<<curr->left->right->val;
+                    if(curr->right and curr->right->left!=NULL)
+                        sum+=curr->right->left->val;
+                        // cout<<curr->right->left->val;
+                    if(curr->right and curr->right->right!=NULL)
+                        sum+=curr->right->right->val;
+                        // cout<<curr->right->right->val;
                 }
-
-                
                 if (curr->left)
-                    q.push({curr->left, curr});
+                    q.push(curr->left);
                 if (curr->right)
-                    q.push({curr->right, curr});
+                    q.push(curr->right);
             }
         }
         return sum;
