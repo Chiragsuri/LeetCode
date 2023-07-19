@@ -11,15 +11,16 @@
  */
 class Solution {
 public:
-    
     int minDepth(TreeNode* root) {
-        if(!root)
+        if (!root)
             return 0;
-        int depth=0;
-        queue<TreeNode*>q;
+
+        int depth = 0;
+        queue<TreeNode*> q;
         q.push(root);
-        while(!q.empty()){
-           depth++; // Increase the depth for each level of the tree
+
+        while (!q.empty()) {
+            depth++; // Increase the depth for each level of the tree
 
             int levelSize = q.size();
             for (int i = 0; i < levelSize; i++) {
@@ -37,7 +38,7 @@ public:
                     q.push(curr->right);
             }
         }
-        return depth;
-        
+
+        return depth; // This will not be reached in a valid binary tree
     }
 };
