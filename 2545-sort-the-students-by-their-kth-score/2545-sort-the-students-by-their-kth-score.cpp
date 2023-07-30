@@ -11,9 +11,7 @@ public:
         
         vector<vector<int>>ans(n, vector<int> (m, 0));
         for(int i=0 ; i<score.size();i++){
-            for(int j=0;j<score[0].size();j++){
-                ans[i][j] = score[v[i].second][j];
-            }
+                ans[i] = score[v[i].second];
         }
         return ans;
     }
