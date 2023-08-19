@@ -1,21 +1,20 @@
 class Solution {
 public:
-    vector<int> plusOne(vector<int>& v) {
-        int n = v.size();
-        for(int i = n-1; i >= 0; i--){
-            if(i == n-1)
-                v[i]++;
-            if(v[i] == 10){
-                v[i] = 0;
-                if(i != 0){
-                    v[i-1]++;
-                }
-                else{
-                    v.push_back(0);
-                    v[i] = 1;
-                }
-            }
+    vector<int> plusOne(vector<int>& digits) {
+     
+        vector<int>ans=digits;
+        int i=digits.size()-1;
+        ans[i]++;
+        int carry=0;
+        while(i>=0){
+            ans[i]+=carry;
+            carry=ans[i]/10;
+            ans[i]%=10;
+            i--;
         }
-        return v;
+        cout<<carry;
+        if(carry)
+            ans.insert(ans.begin(),carry);
+        return ans;
     }
 };
