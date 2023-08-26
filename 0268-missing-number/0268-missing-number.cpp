@@ -1,15 +1,30 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        unordered_map<int,int>mp;
-        for(auto it:nums)
-            mp[it]++;
-        for(int i=0;i<=nums.size();i++)
-            if(!mp[i])
-                return i;
-        return 0;
+        int n = nums.size();
+        int expectedSum = n * (n + 1) / 2;
+        int actualSum = 0;
+        
+        for (int num : nums) {
+            actualSum += num;
+        }
+        
+        return expectedSum - actualSum;
     }
 };
+
+// class Solution {
+// public:
+//     int missingNumber(vector<int>& nums) {
+//         unordered_map<int,int>mp;
+//         for(auto it:nums)
+//             mp[it]++;
+//         for(int i=0;i<=nums.size();i++)
+//             if(!mp[i])
+//                 return i;
+//         return 0;
+//     }
+// };
 
 // class Solution {
 // public:
