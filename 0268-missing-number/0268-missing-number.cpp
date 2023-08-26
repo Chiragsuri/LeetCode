@@ -1,17 +1,29 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int n = nums.size();
-        int expectedSum = n * (n + 1) / 2;
-        int actualSum = 0;
-        
-        for (int num : nums) {
-            actualSum += num;
-        }
-        
-        return expectedSum - actualSum;
+        int result=0;
+        for(auto it:nums)
+            result^=it;
+        for(int i=0;i<=nums.size();i++)
+            result^=i;
+        return result;
     }
 };
+
+// class Solution {
+// public:
+//     int missingNumber(vector<int>& nums) {
+//         int n = nums.size();
+//         int expectedSum = n * (n + 1) / 2;
+//         int actualSum = 0;
+        
+//         for (int num : nums) {
+//             actualSum += num;
+//         }
+        
+//         return expectedSum - actualSum;
+//     }
+// };
 
 // class Solution {
 // public:
