@@ -28,7 +28,7 @@ public:
         }
         
         for(auto letter : m[digits[i]-'0']){
-            currString.push_back(letter);
+            currString+=letter;
             makeCombinations(digits, currString, i+1);
             currString.pop_back();
         }
