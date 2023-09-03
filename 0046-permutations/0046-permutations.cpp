@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<vector<int>> result;
     
-    // Backtracking
     void permutation(vector<int> &nums,int i,int n){
         if(i==n){
             result.push_back(nums);
